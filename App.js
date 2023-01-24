@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState } from 'react';
 import Chessboard from 'react-native-chessboard';
 
 const moves = [

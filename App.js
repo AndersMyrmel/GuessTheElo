@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useRef, useEffect, useState } from 'react';
+import { swap } from './services/reverseMoves';
 import Chessboard from 'react-native-chessboard';
 
 const moves = [
@@ -13,11 +14,18 @@ const moves = [
 	{ from: 'f3', to: 'f7' },
 ];
 
+let movesCopy = moves.map((e) => Object.assign({}, e));
+movesCopy.forEach((e) => swap(e, 'from', 'to'));
+
 export default function app() {
 	const [count, setCount] = useState(0);
+	const [fenArr, updateFenArr] = useState([]);
 	const chessboardRef = useRef();
 
 	const nextMove = async () => {
+		if (fenArr.indexOf(chessboardRef.current?.getState().fen) === -1) {
+			updateFenArr((arr) => [...arr, chessboardRef.current?.getState().fen]);
+		}
 		try {
 			await chessboardRef.current?.move(moves[count]);
 			setCount(count + 1);
@@ -26,25 +34,32 @@ export default function app() {
 		}
 	};
 
-	//useEffect(() => {
-	//	(async () => {
-	//		await chessboardRef.current?.move({ from: 'e2', to: 'e4' });
-	//		await chessboardRef.current?.move({ from: 'e7', to: 'e5' });
-	//		await chessboardRef.current?.move({ from: 'd1', to: 'f3' });
-	//		await chessboardRef.current?.move({ from: 'a7', to: 'a6' });
-	//		await chessboardRef.current?.move({ from: 'f1', to: 'c4' });
-	//		await chessboardRef.current?.move({ from: 'a6', to: 'a5' });
-	//		await chessboardRef.current?.move({ from: 'f3', to: 'f7' });
-	//	})();
-	//}, []);
+	const previousMove = async () => {
+		try {
+			await chessboardRef.current?.resetBoard(fenArr[count - 1]);
+			setCount(count - 1);
+		} catch (e) {
+			console.log(e);
+		}
+	};
 
 	return (
 		<View style={styles.container}>
 			<Text>GTE</Text>
 			<StatusBar style="auto" />
-			<Chessboard ref={chessboardRef} durations={{ move: 250 }} />
+			<Chessboard
+				ref={chessboardRef}
+				durations={{ move: 250 }}
+				onMove={({ state }) => {
+					//console.log(state.fen, fen);
+				}}
+			/>
 			<View style={styles.buttonContainer}>
-				<Button style={styles.button} title="Previous Move" />
+				<Button
+					style={styles.button}
+					title="Previous Move"
+					onPress={previousMove}
+				/>
 				<Button style={styles.button} title="Next Move" onPress={nextMove} />
 			</View>
 		</View>

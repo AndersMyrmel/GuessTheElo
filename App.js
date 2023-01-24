@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useRef, useEffect, useState } from 'react';
-import { swap } from './services/reverseMoves';
+import { swap } from './services/swap';
 import Chessboard from 'react-native-chessboard';
 
 const moves = [

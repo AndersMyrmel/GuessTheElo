@@ -47,13 +47,7 @@ export default function app() {
 		<View style={styles.container}>
 			<Text>GTE</Text>
 			<StatusBar style="auto" />
-			<Chessboard
-				ref={chessboardRef}
-				durations={{ move: 250 }}
-				onMove={({ state }) => {
-					//console.log(state.fen, fen);
-				}}
-			/>
+			<Chessboard ref={chessboardRef} durations={{ move: 225 }} />
 			<View style={styles.buttonContainer}>
 				<Button
 					style={styles.button}

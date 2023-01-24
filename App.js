@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useRef, useEffect, useState } from 'react';
-import { swap } from './services/swap';
 import Chessboard from 'react-native-chessboard';
 
 const moves = [
@@ -13,9 +12,6 @@ const moves = [
 	{ from: 'a6', to: 'a5' },
 	{ from: 'f3', to: 'f7' },
 ];
-
-let movesCopy = moves.map((e) => Object.assign({}, e));
-movesCopy.forEach((e) => swap(e, 'from', 'to'));
 
 export default function app() {
 	const [count, setCount] = useState(0);

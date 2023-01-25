@@ -1,7 +1,8 @@
-import { View, Button } from 'react-native';
+import { View } from 'react-native';
 import { useRef, useState } from 'react';
-import { PgnConverter } from '../../utilities/PgnConverter';
 import { Styles } from './Styles';
+import { PgnConverter } from '../../utilities/PgnConverter';
+import { PreviousMove, ResetBoard, NextMove } from './Helper/Index';
 import Chessboard from 'react-native-chessboard';
 
 const pgn =
@@ -11,40 +12,28 @@ const moves = PgnConverter(pgn);
 
 export const Play = () => {
 	const [count, setCount] = useState(0);
-	const [fenArr, updateFenArr] = useState([]);
+	const [fenArray, updateFenArray] = useState([]);
 	const chessboardRef = useRef();
-
-	const nextMove = async () => {
-		if (fenArr.indexOf(chessboardRef.current?.getState().fen) === -1) {
-			updateFenArr((arr) => [...arr, chessboardRef.current?.getState().fen]);
-		}
-		try {
-			await chessboardRef.current?.move(moves[count]);
-			setCount(count + 1);
-		} catch {
-			alert('Game over');
-		}
-	};
-
-	const previousMove = async () => {
-		try {
-			await chessboardRef.current?.resetBoard(fenArr[count - 1]);
-			setCount(count - 1);
-		} catch (e) {
-			console.log(e);
-		}
-	};
 
 	return (
 		<View style={Styles.container}>
-			<Chessboard ref={chessboardRef} durations={{ move: 200 }} />
+			<Chessboard ref={chessboardRef} durations={{ move: 150 }} />
 			<View style={Styles.buttonContainer}>
-				<Button
-					style={Styles.button}
-					title="Previous Move"
-					onPress={previousMove}
+				<ResetBoard board={chessboardRef} setCount={setCount} />
+				<PreviousMove
+					board={chessboardRef}
+					count={count}
+					setCount={setCount}
+					fenArr={fenArray}
 				/>
-				<Button style={Styles.button} title="Next Move" onPress={nextMove} />
+				<NextMove
+					board={chessboardRef}
+					moves={moves}
+					count={count}
+					setCount={setCount}
+					fenArr={fenArray}
+					updateArr={updateFenArray}
+				/>
 			</View>
 		</View>
 	);

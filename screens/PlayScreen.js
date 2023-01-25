@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { useRef, useState } from 'react';
 import Chessboard from 'react-native-chessboard';
+import { pgnConverter } from '../utilities/pgnConverter';
 
 const moves = [
 	{ from: 'e2', to: 'e4' },
@@ -12,10 +13,16 @@ const moves = [
 	{ from: 'f3', to: 'f7' },
 ];
 
+const pgn =
+	'1. e4 e6 2. d4 b6 3. a3 Bb7 4. Nc3 Nh6 5. Bxh6 gxh6 6. Be2 Qg5 7. Bg4 h5 8. Nf3 Qg6 9. Nh4 Qg5 10. Bxh5 Qxh4 11. Qf3 Kd8 12. Qxf7 Nc6 13. Qe8# 1-0';
+
 export default function PlayScreen() {
 	const [count, setCount] = useState(0);
 	const [fenArr, updateFenArr] = useState([]);
 	const chessboardRef = useRef();
+
+	let test = pgnConverter(pgn);
+	console.log(test);
 
 	const nextMove = async () => {
 		if (fenArr.indexOf(chessboardRef.current?.getState().fen) === -1) {

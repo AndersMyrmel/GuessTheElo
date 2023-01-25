@@ -1,19 +1,6 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-export const Home = ({ navigation }) => {
-	return (
-		<View style={styles.container}>
-			<Pressable
-				style={styles.button}
-				onPress={() => navigation.navigate('Play')}
-			>
-				<Text style={styles.text}>PLAY</Text>
-			</Pressable>
-		</View>
-	);
-};
-
-const styles = StyleSheet.create({
+export const Styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#1d1d1d',

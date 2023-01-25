@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Home } from './components/Home';
-import { Play } from './components/Play';
+import { Home } from './src/components/Home/Home';
+import { Play } from './src/components/Play/Play';
 
 const Stack = createNativeStackNavigator();
 

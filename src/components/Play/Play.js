@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { Text, View, Button } from 'react-native';
 import { useRef, useState } from 'react';
 import Chessboard from 'react-native-chessboard';
-import { pgnConverter } from '../utilities/pgnConverter';
+import { pgnConverter } from '../../utilities/pgnConverter';
+import { Styles } from './Styles';
 
 const pgn =
 	'1. e4 e6 2. d4 b6 3. a3 Bb7 4. Nc3 Nh6 5. Bxh6 gxh6 6. Be2 Qg5 7. Bg4 h5 8. Nf3 Qg6 9. Nh4 Qg5 10. Bxh5 Qxh4 11. Qf3 Kd8 12. Qxf7 Nc6 13. Qe8# 1-0';
@@ -35,34 +36,16 @@ export const Play = () => {
 	};
 
 	return (
-		<View style={styles.container}>
+		<View style={Styles.container}>
 			<Chessboard ref={chessboardRef} durations={{ move: 200 }} />
-			<View style={styles.buttonContainer}>
+			<View style={Styles.buttonContainer}>
 				<Button
-					style={styles.button}
+					style={Styles.button}
 					title="Previous Move"
 					onPress={previousMove}
 				/>
-				<Button style={styles.button} title="Next Move" onPress={nextMove} />
+				<Button style={Styles.button} title="Next Move" onPress={nextMove} />
 			</View>
 		</View>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#1d1d1d',
-		color: '#43ca83',
-		justifyContent: 'center',
-	},
-	buttonContainer: {
-		flexDirection: 'row',
-		justifyContent: 'space-evenly',
-		marginTop: 20,
-		paddingRight: 30,
-		marginHorizontal: 20,
-		marginRight: 20,
-	},
-	button: {},
-});

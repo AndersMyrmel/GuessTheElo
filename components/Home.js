@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 
-export default function HomeScreen({ navigation }) {
+export const Home = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<Pressable
@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation }) {
 			</Pressable>
 		</View>
 	);
-}
+};
 
 const styles = StyleSheet.create({
 	container: {

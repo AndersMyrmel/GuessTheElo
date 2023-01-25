@@ -1,13 +1,13 @@
-import { Text, View, Button } from 'react-native';
+import { View, Button } from 'react-native';
 import { useRef, useState } from 'react';
-import Chessboard from 'react-native-chessboard';
-import { pgnConverter } from '../../utilities/pgnConverter';
+import { PgnConverter } from '../../utilities/PgnConverter';
 import { Styles } from './Styles';
+import Chessboard from 'react-native-chessboard';
 
 const pgn =
 	'1. e4 e6 2. d4 b6 3. a3 Bb7 4. Nc3 Nh6 5. Bxh6 gxh6 6. Be2 Qg5 7. Bg4 h5 8. Nf3 Qg6 9. Nh4 Qg5 10. Bxh5 Qxh4 11. Qf3 Kd8 12. Qxf7 Nc6 13. Qe8# 1-0';
 
-const moves = pgnConverter(pgn);
+const moves = PgnConverter(pgn);
 
 export const Play = () => {
 	const [count, setCount] = useState(0);

@@ -1,6 +1,6 @@
 import { Chess } from 'chess.js';
 
-export const pgnConverter = (pgn) => {
+export const PgnConverter = (pgn) => {
 	const chess = new Chess();
 	chess.loadPgn(pgn);
 	const moveHistory = chess.history({ verbose: true });

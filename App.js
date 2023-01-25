@@ -1,65 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { useRef, useState } from 'react';
-import Chessboard from 'react-native-chessboard';
+import { StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './screens/HomeScreen';
+import PlayScreen from './screens/PlayScreen';
 
-const moves = [
-	{ from: 'e2', to: 'e4' },
-	{ from: 'e7', to: 'e5' },
-	{ from: 'd1', to: 'f3' },
-	{ from: 'a7', to: 'a6' },
-	{ from: 'f1', to: 'c4' },
-	{ from: 'a6', to: 'a5' },
-	{ from: 'f3', to: 'f7' },
-];
+const Stack = createNativeStackNavigator();
 
-export default function app() {
-	const [count, setCount] = useState(0);
-	const [fenArr, updateFenArr] = useState([]);
-	const chessboardRef = useRef();
-
-	const nextMove = async () => {
-		if (fenArr.indexOf(chessboardRef.current?.getState().fen) === -1) {
-			updateFenArr((arr) => [...arr, chessboardRef.current?.getState().fen]);
-		}
-		try {
-			await chessboardRef.current?.move(moves[count]);
-			setCount(count + 1);
-		} catch {
-			alert('Game over');
-		}
-	};
-
-	const previousMove = async () => {
-		try {
-			await chessboardRef.current?.resetBoard(fenArr[count - 1]);
-			setCount(count - 1);
-		} catch (e) {
-			console.log(e);
-		}
-	};
-
+export default function App() {
 	return (
-		<View style={styles.container}>
-			<Text>GTE</Text>
-			<StatusBar style="auto" />
-			<Chessboard ref={chessboardRef} durations={{ move: 225 }} />
-			<View style={styles.buttonContainer}>
-				<Button
-					style={styles.button}
-					title="Previous Move"
-					onPress={previousMove}
-				/>
-				<Button style={styles.button} title="Next Move" onPress={nextMove} />
-			</View>
-		</View>
+		<NavigationContainer>
+			<Stack.Navigator>
+				<Stack.Screen name="Home" component={HomeScreen} />
+				<Stack.Screen name="Play" component={PlayScreen} />
+			</Stack.Navigator>
+		</NavigationContainer>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		backgroundColor: '#1d1d1d',
+		color: '#43ca83',
 		alignItems: 'center',
 		justifyContent: 'center',
 		textAlign: 'center',

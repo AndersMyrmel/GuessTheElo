@@ -4,6 +4,7 @@ export const pgnConverter = (pgn) => {
 	const chess = new Chess();
 	chess.loadPgn(pgn);
 	const moveHistory = chess.history({ verbose: true });
+
 	let result = [];
 	let i = 1;
 
@@ -18,5 +19,6 @@ export const pgnConverter = (pgn) => {
 		}
 		i++;
 	}
+
 	return result;
 };

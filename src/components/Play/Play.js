@@ -2,7 +2,7 @@ import { View } from 'react-native';
 import { useRef, useState } from 'react';
 import { Styles } from './Styles';
 import { PgnConverter } from '../../utilities/PgnConverter';
-import { PreviousMove, ResetBoard, NextMove } from './Helper/Index';
+import { PreviousMove, ResetBoard, NextMove } from './Actions/Index';
 import Chessboard from 'react-native-chessboard';
 
 const pgn =

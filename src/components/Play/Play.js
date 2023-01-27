@@ -1,8 +1,10 @@
 import { View } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Styles } from './Styles';
-import { PgnConverter } from '../../utilities/PgnConverter';
-import { PreviousMove, ResetBoard, NextMove } from './Actions/Index';
+import { PgnConverter } from '../../services/PgnConverter';
+import { PreviousMove, ResetBoard, NextMove, Game } from './Utilities/Index';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../../firebaseConfig';
 import Chessboard from 'react-native-chessboard';
 
 const pgn =
@@ -15,22 +17,37 @@ export const Play = () => {
 	const [fenArray, updateFenArray] = useState([]);
 	const chessboardRef = useRef();
 
-	const [game, setGame] = useState();
-
-	//useEffect(() => {
-	//	fetch('../../data/Games.txt').then((response) =>
-	//		response.text().then((text) => {
-	//			setGame(text);
-	//		})
-	//	);
-	//	console.log(game);
-	//}, []);
-
 	useEffect(() => {
-		fetch('../../data/Games.txt')
-			.then((response) => response.text())
-			.then((text) => setGame(text));
-		console.log(game);
+		const gameConverter = {
+			fromFirestore: (snapshot, options) => {
+				const data = snapshot.data(options);
+				return new Game(
+					data.White,
+					data.Black,
+					data.Result,
+					data.Whiteelo,
+					data.Blackelo,
+					data.Moves
+				);
+			},
+		};
+
+		const ref = doc(
+			db,
+			'games',
+			(Math.floor(Math.random() * 1000) + 1).toString()
+		).withConverter(gameConverter);
+		const getGame = async () => {
+			const docSnap = await getDoc(ref);
+			if (docSnap.exists()) {
+				const game = docSnap.data();
+				console.log(game);
+			} else {
+				console.log('No such document!');
+			}
+		};
+
+		getGame();
 	}, []);
 
 	return (

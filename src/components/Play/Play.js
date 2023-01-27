@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { useEffect, useReducer, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import { Styles } from './Styles';
 import { PgnConverter } from '../../services/PgnConverter';
 import { doc, getDoc } from 'firebase/firestore';
@@ -37,7 +37,7 @@ export const Play = () => {
 		<View style={Styles.container}>
 			<Chessboard ref={chessboardRef} durations={{ move: 150 }} />
 			<View style={Styles.buttonContainer}>
-				<ResetBoard board={chessboardRef} state={state} dispatch={dispatch} />
+				<ResetBoard board={chessboardRef} dispatch={dispatch} />
 				<PreviousMove board={chessboardRef} state={state} dispatch={dispatch} />
 				<NextMove board={chessboardRef} state={state} dispatch={dispatch} />
 			</View>

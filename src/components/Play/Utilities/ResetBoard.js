@@ -1,6 +1,6 @@
 import { Button } from 'react-native';
 
-export const ResetBoard = ({ board, state, dispatch }) => {
+export const ResetBoard = ({ board, dispatch }) => {
 	const reset = async () => {
 		try {
 			await board.current?.resetBoard(

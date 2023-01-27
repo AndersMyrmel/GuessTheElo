@@ -4,8 +4,13 @@ import { Styles } from './Styles';
 import { PgnConverter } from '../../services/PgnConverter';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
-import { PreviousMove, ResetBoard, NextMove, Game } from './Utilities/Index';
 import Chessboard from 'react-native-chessboard';
+import {
+	PreviousMove,
+	ResetBoard,
+	NextMove,
+	GameConverter,
+} from './Utilities/Index';
 
 export const Play = () => {
 	const [count, setCount] = useState(0);
@@ -14,20 +19,6 @@ export const Play = () => {
 	const chessboardRef = useRef();
 
 	useEffect(() => {
-		const GameConverter = {
-			fromFirestore: (snapshot, options) => {
-				const data = snapshot.data(options);
-				return new Game(
-					data.White,
-					data.Black,
-					data.Result,
-					data.Whiteelo,
-					data.Blackelo,
-					data.Moves
-				);
-			},
-		};
-
 		const ref = doc(
 			db,
 			'games',

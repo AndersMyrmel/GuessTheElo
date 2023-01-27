@@ -1,10 +1,11 @@
 import { View } from 'react-native';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { Styles } from './Styles';
 import { PgnConverter } from '../../services/PgnConverter';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
 import Chessboard from 'react-native-chessboard';
+import { GameReducer, INITIAL_STATE } from './Utilities/GameReducer';
 import {
 	PreviousMove,
 	ResetBoard,
@@ -13,9 +14,7 @@ import {
 } from './Utilities/Index';
 
 export const Play = () => {
-	const [count, setCount] = useState(0);
-	const [fenArray, updateFenArray] = useState([]);
-	const [moves, setMoves] = useState();
+	const [state, dispatch] = useReducer(GameReducer, INITIAL_STATE);
 	const chessboardRef = useRef();
 
 	useEffect(() => {
@@ -28,7 +27,7 @@ export const Play = () => {
 		const getGame = async () => {
 			const docSnap = await getDoc(ref);
 			const game = docSnap.data();
-			setMoves(PgnConverter(game.moves));
+			dispatch({ type: 'setmoves', payload: PgnConverter(game.moves) });
 		};
 
 		getGame().catch(console.error);
@@ -36,23 +35,11 @@ export const Play = () => {
 
 	return (
 		<View style={Styles.container}>
-			<Chessboard ref={chessboardRef} durations={{ move: 125 }} />
+			<Chessboard ref={chessboardRef} durations={{ move: 150 }} />
 			<View style={Styles.buttonContainer}>
-				<ResetBoard board={chessboardRef} setCount={setCount} />
-				<PreviousMove
-					board={chessboardRef}
-					count={count}
-					setCount={setCount}
-					fenArr={fenArray}
-				/>
-				<NextMove
-					board={chessboardRef}
-					moves={moves}
-					count={count}
-					setCount={setCount}
-					fenArr={fenArray}
-					updateArr={updateFenArray}
-				/>
+				<ResetBoard board={chessboardRef} state={state} dispatch={dispatch} />
+				<PreviousMove board={chessboardRef} state={state} dispatch={dispatch} />
+				<NextMove board={chessboardRef} state={state} dispatch={dispatch} />
 			</View>
 		</View>
 	);

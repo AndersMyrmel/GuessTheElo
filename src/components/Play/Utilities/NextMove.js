@@ -1,20 +1,16 @@
 import { Button } from 'react-native';
 
-export const NextMove = ({
-	board,
-	moves,
-	setCount,
-	count,
-	fenArr,
-	updateArr,
-}) => {
+export const NextMove = ({ board, state, dispatch }) => {
 	const next = async () => {
-		if (fenArr.indexOf(board.current?.getState().fen) === -1) {
-			updateArr((arr) => [...arr, board.current?.getState().fen]);
+		if (state.fenArray.indexOf(board.current?.getState().fen) === -1) {
+			dispatch({
+				type: 'setfen',
+				payload: board.current?.getState().fen,
+			});
 		}
 		try {
-			await board.current?.move(moves[count]);
-			setCount(count + 1);
+			await board.current?.move(state.moves[state.count]);
+			dispatch({ type: 'setcount', payload: state.count + 1 });
 		} catch {
 			alert('Game over');
 		}

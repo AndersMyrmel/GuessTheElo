@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Styles } from './Styles';
 import { PgnConverter } from '../../utilities/PgnConverter';
 import { PreviousMove, ResetBoard, NextMove } from './Actions/Index';
@@ -14,6 +14,24 @@ export const Play = () => {
 	const [count, setCount] = useState(0);
 	const [fenArray, updateFenArray] = useState([]);
 	const chessboardRef = useRef();
+
+	const [game, setGame] = useState();
+
+	//useEffect(() => {
+	//	fetch('../../data/Games.txt').then((response) =>
+	//		response.text().then((text) => {
+	//			setGame(text);
+	//		})
+	//	);
+	//	console.log(game);
+	//}, []);
+
+	useEffect(() => {
+		fetch('../../data/Games.txt')
+			.then((response) => response.text())
+			.then((text) => setGame(text));
+		console.log(game);
+	}, []);
 
 	return (
 		<View style={Styles.container}>

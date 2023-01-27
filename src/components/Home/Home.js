@@ -12,7 +12,7 @@ export const Home = ({ navigation }) => {
 				style={Styles.button}
 				onPress={() => navigation.navigate('Play')}
 			>
-				<Text style={Styles.button}>PLAY</Text>
+				<Text style={Styles.text}>PLAY</Text>
 			</Pressable>
 			<Pressable
 				style={Styles.button}

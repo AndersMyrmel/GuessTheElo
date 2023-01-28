@@ -1,5 +1,5 @@
 # Guess The Elo :chess_pawn:
-Chess guessing game based on Gothamchess' GTE series
+Chess game developed with react and firebase
 
 [![My Skills](https://skillicons.dev/icons?i=react,firebase)](https://skillicons.dev)
 

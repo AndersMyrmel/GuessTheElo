@@ -10,3 +10,4 @@ Chess game for iOS and Android developed with react and firebase
 - [ ] Splash screen
 - [ ] Home screen
 - [ ] Walktrough screen: https://www.shutterstock.com/nb/image-vector/people-playing-chess-game-set-young-2121129050
+- [ ] Icons on move buttons

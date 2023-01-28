@@ -4,7 +4,7 @@ Guess the elo game written with react native
 [![My Skills](https://skillicons.dev/icons?i=react,firebase)](https://skillicons.dev)
 
 ## Todo:
-![]Database / Game registry
+![](Database / Game registry)
 
 ![]Hiscores (Firebase) + Create account 
 

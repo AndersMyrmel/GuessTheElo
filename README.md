@@ -1,5 +1,6 @@
 # GuessTheElo
 Guess the elo game written with react native
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,wasm)](https://skillicons.dev)
 
 ## Todo:
 Database / Game registry

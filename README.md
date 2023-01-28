@@ -1,5 +1,6 @@
 # GuessTheElo
 Guess the elo game written with react native
+
 [![My Skills](https://skillicons.dev/icons?i=react,firebase)](https://skillicons.dev)
 
 ## Todo:

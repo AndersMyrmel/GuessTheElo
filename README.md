@@ -3,7 +3,7 @@ Chess game developed with react and firebase
 
 [![My Skills](https://skillicons.dev/icons?i=react,firebase)](https://skillicons.dev)
 
-## Todo:
+## Todo :heavy_check_mark:
 - [X] Database / Game registry
 - [ ] Hiscores (Firebase) + Create account
 - [ ] Settings (Color themes)

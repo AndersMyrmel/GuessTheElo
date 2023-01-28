@@ -1,7 +1,7 @@
 # Guess The Elo :chess_pawn:
 Chess game for iOS and Android developed with react and firebase
 
-[![My Skills](https://skillicons.dev/icons?i=react,firebase)]
+![My Skills](https://skillicons.dev/icons?i=react,firebase)
 
 ## Tasks :heavy_check_mark:
 - [X] Database / Game registry

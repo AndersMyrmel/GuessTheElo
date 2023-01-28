@@ -1,5 +1,5 @@
 # Guess The Elo :chess_pawn:
-Guess the elo game written with react native
+Chess guessing game based on Gothamchess' GTE series
 
 [![My Skills](https://skillicons.dev/icons?i=react,firebase)](https://skillicons.dev)
 

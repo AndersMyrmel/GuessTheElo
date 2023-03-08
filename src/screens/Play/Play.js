@@ -1,5 +1,5 @@
-import { View } from 'react-native';
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
+import { View, Image, TouchableOpacity, Text, TextInput } from 'react-native';
 import { Styles } from './Styles';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
@@ -10,11 +10,14 @@ import {
 	PreviousMove,
 	ResetBoard,
 	NextMove,
+	SkipMoves,
 	GameConverter,
 } from './utilities/Index';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-export const Play = () => {
+export const Play = ({ navigation }) => {
 	const [state, dispatch] = useReducer(GameReducer, INITIAL_STATE);
+	const [value, onChangeText] = useState('Enter guess here');
 	const chessboardRef = useRef();
 
 	useEffect(() => {
@@ -35,12 +38,37 @@ export const Play = () => {
 
 	return (
 		<View style={Styles.container}>
-			<Chessboard ref={chessboardRef} durations={{ move: 150 }} />
+			<TouchableOpacity
+				style={Styles.arrowback}
+				onPress={() => navigation.navigate('Home')}
+			>
+				<Image
+					style={{ width: 32, height: 32 }}
+					source={require('../../assets/images/arrow-back.png')}
+				/>
+			</TouchableOpacity>
+			<View style={Styles.board}>
+				<Chessboard
+					ref={chessboardRef}
+					durations={{ move: 150 }}
+					boardSize={340}
+				/>
+			</View>
 			<View style={Styles.buttonContainer}>
 				<ResetBoard board={chessboardRef} dispatch={dispatch} />
 				<PreviousMove board={chessboardRef} state={state} dispatch={dispatch} />
 				<NextMove board={chessboardRef} state={state} dispatch={dispatch} />
+				<SkipMoves />
 			</View>
+			<TextInput
+				style={Styles.inputfield}
+				editable
+				onChangeText={(text) => onChangeText(text)}
+				value={value}
+			></TextInput>
+			<TouchableOpacity style={Styles.guessbtn}>
+				<Text style={Styles.btntext}>Guess</Text>
+			</TouchableOpacity>
 		</View>
 	);
 };

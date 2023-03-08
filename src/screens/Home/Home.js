@@ -30,7 +30,7 @@ export const Home = ({ navigation }) => {
 				style={Styles.playbtn}
 				onPress={() => navigation.navigate('Play')}
 			>
-				<Text style={Styles.btntext}>PLAY</Text>
+				<Text style={Styles.btntext}>Play</Text>
 			</TouchableOpacity>
 		</SafeAreaView>
 	);

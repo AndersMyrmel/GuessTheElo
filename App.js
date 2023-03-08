@@ -14,6 +14,7 @@ export default function App() {
 		'Alegreya-Medium': require('./src/assets/fonts/Alegreya/Alegreya-Medium.ttf'),
 		'Alegreya-Regular': require('./src/assets/fonts/Alegreya/Alegreya-Regular.ttf'),
 		'Poppins-Medium': require('./src/assets/fonts/Poppins/Poppins-Medium.ttf'),
+		'Roboto-Medium': require('./src/assets/fonts/Roboto/Roboto-Medium.ttf'),
 	});
 
 	const onLayoutRootView = useCallback(async () => {

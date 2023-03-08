@@ -1,4 +1,4 @@
-import { Button } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
 
 export const ResetBoard = ({ board, dispatch }) => {
 	const reset = async () => {
@@ -12,5 +12,12 @@ export const ResetBoard = ({ board, dispatch }) => {
 		}
 	};
 
-	return <Button title="Reset" onPress={reset} />;
+	return (
+		<TouchableOpacity onPress={reset} style={{ left: 10 }}>
+			<Image
+				style={{ width: 47, height: 47 }}
+				source={require('../../../assets/images/reset-button.png')}
+			/>
+		</TouchableOpacity>
+	);
 };

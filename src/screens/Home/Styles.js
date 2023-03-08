@@ -30,7 +30,7 @@ export const Styles = StyleSheet.create({
 		width: 341,
 		height: 55,
 		borderRadius: 5,
-		top: 680,
+		top: 690,
 		position: 'absolute',
 	},
 	btntext: {

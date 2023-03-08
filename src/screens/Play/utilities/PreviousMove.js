@@ -1,4 +1,4 @@
-import { Button } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
 
 export const PreviousMove = ({ board, state, dispatch }) => {
 	const previous = async () => {
@@ -10,5 +10,12 @@ export const PreviousMove = ({ board, state, dispatch }) => {
 		}
 	};
 
-	return <Button title="Previous Move" onPress={previous} />;
+	return (
+		<TouchableOpacity onPress={previous}>
+			<Image
+				style={{ width: 47, height: 47 }}
+				source={require('../../../assets/images/back-button.png')}
+			/>
+		</TouchableOpacity>
+	);
 };

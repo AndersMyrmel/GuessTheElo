@@ -1,4 +1,4 @@
-import { Button } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 
 export const NextMove = ({ board, state, dispatch }) => {
 	const next = async () => {
@@ -16,5 +16,12 @@ export const NextMove = ({ board, state, dispatch }) => {
 		}
 	};
 
-	return <Button title="Next Move" onPress={next} />;
+	return (
+		<TouchableOpacity onPress={next}>
+			<Image
+				style={{ width: 47, height: 47 }}
+				source={require('../../../assets/images/forward-button.png')}
+			/>
+		</TouchableOpacity>
+	);
 };

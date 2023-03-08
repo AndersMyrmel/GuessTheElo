@@ -1,17 +1,17 @@
 import { View } from 'react-native';
 import { useEffect, useReducer, useRef } from 'react';
 import { Styles } from './Styles';
-import { PgnConverter } from '../../services/PgnConverter';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
 import Chessboard from 'react-native-chessboard';
-import { GameReducer, INITIAL_STATE } from './Utilities/GameReducer';
+import { PgnConverter } from '../../services/PgnConverter';
+import { GameReducer, INITIAL_STATE } from './utilities/GameReducer';
 import {
 	PreviousMove,
 	ResetBoard,
 	NextMove,
 	GameConverter,
-} from './Utilities/Index';
+} from './utilities/Index';
 
 export const Play = () => {
 	const [state, dispatch] = useReducer(GameReducer, INITIAL_STATE);

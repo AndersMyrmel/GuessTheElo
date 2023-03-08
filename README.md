@@ -12,3 +12,5 @@ Chess game for iOS and Android developed with react and firebase
 - [ ] Home screen
 - [ ] [Walktrough screen](https://www.shutterstock.com/nb/image-vector/people-playing-chess-game-set-young-2121129050)
 
+## Art :art:
+https://pngtree.com/freepng/woman-playing-chess-game_7299467.html

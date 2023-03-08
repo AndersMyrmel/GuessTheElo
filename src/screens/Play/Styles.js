@@ -12,7 +12,7 @@ export const Styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
 		position: 'absolute',
-		top: 670,
+		top: 680,
 		marginTop: 20,
 		marginHorizontal: 20,
 		width: 324,
@@ -45,6 +45,23 @@ export const Styles = StyleSheet.create({
 	board: {
 		position: 'absolute',
 		top: 300,
+	},
+	movelist: {
+		width: 336,
+		height: 24,
+		position: 'absolute',
+		top: 647,
+		backgroundColor: '#DADADA12',
+		borderRadius: 13,
+		borderWidth: 1,
+		borderColor: '#E5E5E525',
+	},
+	movestext: {
+		color: '#C4C4C4',
+		fontSize: 11,
+		paddingHorizontal: 10,
+		fontFamily: 'Roboto-Medium',
+		alignSelf: 'center',
 	},
 	inputfield: {
 		borderBottomColor: '#E5E5E551',

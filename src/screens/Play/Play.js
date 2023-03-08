@@ -22,12 +22,14 @@ import {
 	NextMove,
 	AutoPlayMoves,
 	GoBack,
+	HorizontalPgnScroller,
 } from '../../components/Index';
 
 export const Play = ({ navigation }) => {
 	const [state, dispatch] = useReducer(GameReducer, INITIAL_STATE);
 	const [input, setInput] = useState('');
 	const chessboardRef = useRef();
+	const [moves, setMoves] = useState('');
 
 	useEffect(() => {
 		const ref = doc(
@@ -39,6 +41,7 @@ export const Play = ({ navigation }) => {
 		const getGame = async () => {
 			const docSnap = await getDoc(ref);
 			const game = docSnap.data();
+			setMoves(game.moves);
 			dispatch({ type: 'setmoves', payload: PgnConverter(game.moves) });
 		};
 
@@ -56,7 +59,7 @@ export const Play = ({ navigation }) => {
 				<TextInput
 					style={Styles.inputfield}
 					editable
-					placeholder="Enter guess here"
+					placeholder="Enter your guess"
 					placeholderTextColor={'#E5E5E551'}
 					keyboardType="numeric"
 					maxLength={4}
@@ -74,6 +77,7 @@ export const Play = ({ navigation }) => {
 						colors={{ black: '#B7C0D8', white: '#E8EDF9' }}
 					/>
 				</View>
+				<HorizontalPgnScroller moves={moves} />
 				<View style={Styles.buttonContainer}>
 					<ResetBoard board={chessboardRef} dispatch={dispatch} />
 					<PreviousMove
@@ -82,7 +86,7 @@ export const Play = ({ navigation }) => {
 						dispatch={dispatch}
 					/>
 					<NextMove board={chessboardRef} state={state} dispatch={dispatch} />
-					<AutoPlayMoves />
+					<AutoPlayMoves state={state} />
 				</View>
 			</View>
 		</ScrollView>

@@ -14,7 +14,7 @@ export const PreviousMove = ({ board, state, dispatch }) => {
 		<TouchableOpacity onPress={previous}>
 			<Image
 				style={{ width: 47, height: 47 }}
-				source={require('../../../assets/images/back-button.png')}
+				source={require('../assets/images/back-button.png')}
 			/>
 		</TouchableOpacity>
 	);

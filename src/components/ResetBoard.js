@@ -16,7 +16,7 @@ export const ResetBoard = ({ board, dispatch }) => {
 		<TouchableOpacity onPress={reset} style={{ left: 10 }}>
 			<Image
 				style={{ width: 47, height: 47 }}
-				source={require('../../../assets/images/reset-button.png')}
+				source={require('../assets/images/reset-button.png')}
 			/>
 		</TouchableOpacity>
 	);

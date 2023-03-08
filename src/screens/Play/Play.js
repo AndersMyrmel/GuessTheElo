@@ -1,23 +1,32 @@
 import { useEffect, useReducer, useRef, useState } from 'react';
-import { View, Image, TouchableOpacity, Text, TextInput } from 'react-native';
+import {
+	View,
+	ScrollView,
+	TouchableOpacity,
+	Text,
+	TextInput,
+} from 'react-native';
 import { Styles } from './Styles';
+import Chessboard from 'react-native-chessboard';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../../firebaseConfig';
-import Chessboard from 'react-native-chessboard';
-import { PgnConverter } from '../../services/PgnConverter';
-import { GameReducer, INITIAL_STATE } from './utilities/GameReducer';
+import {
+	GameReducer,
+	INITIAL_STATE,
+	GameConverter,
+	PgnConverter,
+} from '../../services/Index';
 import {
 	PreviousMove,
 	ResetBoard,
 	NextMove,
-	SkipMoves,
-	GameConverter,
-} from './utilities/Index';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+	AutoPlayMoves,
+	GoBack,
+} from '../../components/Index';
 
 export const Play = ({ navigation }) => {
 	const [state, dispatch] = useReducer(GameReducer, INITIAL_STATE);
-	const [value, onChangeText] = useState('Enter guess here');
+	const [input, setInput] = useState('');
 	const chessboardRef = useRef();
 
 	useEffect(() => {
@@ -37,38 +46,45 @@ export const Play = ({ navigation }) => {
 	}, []);
 
 	return (
-		<View style={Styles.container}>
-			<TouchableOpacity
-				style={Styles.arrowback}
-				onPress={() => navigation.navigate('Home')}
-			>
-				<Image
-					style={{ width: 32, height: 32 }}
-					source={require('../../assets/images/arrow-back.png')}
-				/>
-			</TouchableOpacity>
-			<View style={Styles.board}>
-				<Chessboard
-					ref={chessboardRef}
-					durations={{ move: 150 }}
-					boardSize={340}
-				/>
+		<ScrollView
+			scrollEnabled={false}
+			style={{ backgroundColor: 'rgba(5,5,5,0.90)' }}
+		>
+			<View style={Styles.container}>
+				<GoBack nav={navigation} />
+				<Text style={Styles.indextext}>1/3</Text>
+				<TextInput
+					style={Styles.inputfield}
+					editable
+					placeholder="Enter guess here"
+					placeholderTextColor={'#E5E5E551'}
+					keyboardType="numeric"
+					maxLength={4}
+					onChangeText={(text) => setInput(text)}
+					value={input}
+				></TextInput>
+				<TouchableOpacity style={Styles.submitbtn}>
+					<Text style={Styles.btntext}>Submit</Text>
+				</TouchableOpacity>
+				<View style={Styles.board}>
+					<Chessboard
+						ref={chessboardRef}
+						durations={{ move: 150 }}
+						boardSize={340}
+						colors={{ black: '#B7C0D8', white: '#E8EDF9' }}
+					/>
+				</View>
+				<View style={Styles.buttonContainer}>
+					<ResetBoard board={chessboardRef} dispatch={dispatch} />
+					<PreviousMove
+						board={chessboardRef}
+						state={state}
+						dispatch={dispatch}
+					/>
+					<NextMove board={chessboardRef} state={state} dispatch={dispatch} />
+					<AutoPlayMoves />
+				</View>
 			</View>
-			<View style={Styles.buttonContainer}>
-				<ResetBoard board={chessboardRef} dispatch={dispatch} />
-				<PreviousMove board={chessboardRef} state={state} dispatch={dispatch} />
-				<NextMove board={chessboardRef} state={state} dispatch={dispatch} />
-				<SkipMoves />
-			</View>
-			<TextInput
-				style={Styles.inputfield}
-				editable
-				onChangeText={(text) => onChangeText(text)}
-				value={value}
-			></TextInput>
-			<TouchableOpacity style={Styles.guessbtn}>
-				<Text style={Styles.btntext}>Guess</Text>
-			</TouchableOpacity>
-		</View>
+		</ScrollView>
 	);
 };

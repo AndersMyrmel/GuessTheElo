@@ -20,7 +20,7 @@ export const NextMove = ({ board, state, dispatch }) => {
 		<TouchableOpacity onPress={next}>
 			<Image
 				style={{ width: 47, height: 47 }}
-				source={require('../../../assets/images/forward-button.png')}
+				source={require('../assets/images/forward-button.png')}
 			/>
 		</TouchableOpacity>
 	);

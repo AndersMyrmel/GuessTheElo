@@ -10,10 +10,15 @@ import { Styles } from './Styles';
 export const Home = ({ navigation }) => {
 	return (
 		<SafeAreaView style={Styles.container}>
-			<Image
+			<TouchableOpacity
 				style={Styles.leaderboardicon}
-				source={require('../../assets/images/leaderboard-icon.png')}
-			/>
+				onPress={() => navigation.navigate('Result')}
+			>
+				<Image
+					style={{ width: 32, height: 32 }}
+					source={require('../../assets/images/leaderboard-icon.png')}
+				/>
+			</TouchableOpacity>
 			<Image
 				style={Styles.settingsicon}
 				source={require('../../assets/images/settings-icon.png')}

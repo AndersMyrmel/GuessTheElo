@@ -5,6 +5,7 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { Home } from './src/screens/Home/Home';
 import { Play } from './src/screens/Play/Play';
+import { Result } from './src/screens/Result/Result';
 
 SplashScreen.preventAutoHideAsync();
 const Stack = createNativeStackNavigator();
@@ -13,6 +14,7 @@ export default function App() {
 	const [fontsLoaded] = useFonts({
 		'Alegreya-Medium': require('./src/assets/fonts/Alegreya/Alegreya-Medium.ttf'),
 		'Alegreya-Regular': require('./src/assets/fonts/Alegreya/Alegreya-Regular.ttf'),
+		'Poppins-Regular': require('./src/assets/fonts/Poppins/Poppins-Regular.ttf'),
 		'Poppins-Medium': require('./src/assets/fonts/Poppins/Poppins-Medium.ttf'),
 		'Poppins-SemiBold': require('./src/assets/fonts/Poppins/Poppins-SemiBold.ttf'),
 		'Roboto-Medium': require('./src/assets/fonts/Roboto/Roboto-Medium.ttf'),
@@ -36,6 +38,7 @@ export default function App() {
 			>
 				<Stack.Screen name="Home" component={Home} />
 				<Stack.Screen name="Play" component={Play} />
+				<Stack.Screen name="Result" component={Result} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

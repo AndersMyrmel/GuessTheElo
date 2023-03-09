@@ -54,6 +54,7 @@ export const Play = ({ navigation }) => {
 		<ScrollView
 			scrollEnabled={false}
 			style={{ backgroundColor: 'rgba(5,5,5,0.90)' }}
+			keyboardShouldPersistTaps="handled"
 		>
 			<View style={Styles.container}>
 				<AnsweredModal isVisible={state.modalVisible} dispatch={dispatch} />

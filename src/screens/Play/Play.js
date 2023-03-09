@@ -23,6 +23,7 @@ import {
 	AutoPlayMoves,
 	GoBack,
 	HorizontalPgnScroller,
+	AnsweredModal,
 } from '../../components/Index';
 
 export const Play = ({ navigation }) => {
@@ -30,6 +31,7 @@ export const Play = ({ navigation }) => {
 	const [input, setInput] = useState('');
 	const chessboardRef = useRef();
 	const [moves, setMoves] = useState('');
+	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
 		const ref = doc(
@@ -54,6 +56,7 @@ export const Play = ({ navigation }) => {
 			style={{ backgroundColor: 'rgba(5,5,5,0.90)' }}
 		>
 			<View style={Styles.container}>
+				<AnsweredModal isVisible={visible} setVisible={setVisible} />
 				<GoBack nav={navigation} />
 				<Text style={Styles.indextext}>1/3</Text>
 				<TextInput
@@ -66,7 +69,10 @@ export const Play = ({ navigation }) => {
 					onChangeText={(text) => setInput(text)}
 					value={input}
 				></TextInput>
-				<TouchableOpacity style={Styles.submitbtn}>
+				<TouchableOpacity
+					onPress={() => setVisible(true)}
+					style={Styles.submitbtn}
+				>
 					<Text style={Styles.btntext}>Submit</Text>
 				</TouchableOpacity>
 				<View style={Styles.board}>

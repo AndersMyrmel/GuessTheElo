@@ -5,6 +5,9 @@ export const INITIAL_STATE = {
 	displayMoves: null,
 	input: null,
 	modalVisible: false,
+	round: 1,
+	correctRating: -1,
+	result: null,
 };
 
 export const GameReducer = (state, action) => {
@@ -39,7 +42,22 @@ export const GameReducer = (state, action) => {
 				...state,
 				modalVisible: action.payload,
 			};
-		case 'setmulitple':
+		case 'setround':
+			return {
+				...state,
+				round: action.payload,
+			};
+		case 'setcorrectrating':
+			return {
+				...state,
+				correctRating: action.payload,
+			};
+		case 'setresult':
+			return {
+				...state,
+				result: action.payload,
+			};
+		case 'setmultiple':
 			return {
 				...state,
 				...action.payload,

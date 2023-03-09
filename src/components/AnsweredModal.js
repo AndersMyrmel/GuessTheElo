@@ -7,20 +7,30 @@ import {
 	Image,
 } from 'react-native';
 
-export const AnsweredModal = ({ isVisible, dispatch }) => {
+export const AnsweredModal = ({ state, dispatch }) => {
+	const nextRound = () => {
+		if (state.round >= 3) {
+			console.log('Finished');
+			return dispatch({
+				type: 'setmodalvisible',
+				payload: !state.modalVisible,
+			});
+		}
+		dispatch({
+			type: 'setmultiple',
+			payload: {
+				modalVisible: !state.modalVisible,
+				round: state.round + 1,
+			},
+		});
+	};
+
 	return (
 		<View style={Styles.centeredView}>
 			<Modal
 				animationType="slide"
 				transparent={true}
-				visible={isVisible}
-				onRequestClose={() => {
-					dispatch({
-						type: 'setmodalvisible',
-						payload: !isVisible,
-					});
-					//setVisible(!isVisible);
-				}}
+				visible={state.modalVisible}
 			>
 				<View style={Styles.centeredView}>
 					<View style={Styles.modalView}>
@@ -28,16 +38,13 @@ export const AnsweredModal = ({ isVisible, dispatch }) => {
 							source={require('../assets/images/success-icon.png')}
 							style={Styles.icon}
 						></Image>
-						<Text style={Styles.titletext}>Succesfully answered!</Text>
-						<Text style={Styles.subtext}>Your guess: 1421</Text>
-						<Text style={Styles.subtext}>Correct rating: 1734</Text>
+						<Text style={Styles.titletext}>Round completed!</Text>
+						<Text style={Styles.subtext}>Your guess: {state.input}</Text>
+						<Text style={Styles.subtext}>
+							Correct rating: {state.correctRating}
+						</Text>
 						<TouchableOpacity
-							onPress={() =>
-								dispatch({
-									type: 'setmodalvisible',
-									payload: !isVisible,
-								})
-							}
+							onPress={() => nextRound()}
 							style={Styles.continuebtn}
 						>
 							<Text style={Styles.btntext}>Continue</Text>

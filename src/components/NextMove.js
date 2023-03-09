@@ -12,7 +12,7 @@ export const NextMove = ({ board, state, dispatch }) => {
 			await board.current?.move(state.moves[state.count]);
 			dispatch({ type: 'setcount', payload: state.count + 1 });
 		} catch {
-			alert('Game over');
+			alert(`Game over: ${state.result}`);
 		}
 	};
 

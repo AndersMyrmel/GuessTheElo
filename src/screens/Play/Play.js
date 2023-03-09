@@ -1,10 +1,11 @@
-import { useEffect, useReducer, useRef, useState } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import {
 	View,
 	ScrollView,
 	TouchableOpacity,
 	Text,
 	TextInput,
+	Keyboard,
 } from 'react-native';
 import { Styles } from './Styles';
 import Chessboard from 'react-native-chessboard';
@@ -29,6 +30,7 @@ import {
 export const Play = ({ navigation }) => {
 	const [state, dispatch] = useReducer(GameReducer, INITIAL_STATE);
 	const chessboardRef = useRef();
+	const inputRef = useRef();
 
 	useEffect(() => {
 		const ref = doc(
@@ -43,12 +45,17 @@ export const Play = ({ navigation }) => {
 
 			dispatch({
 				type: 'setmultiple',
-				payload: { displayMoves: game.moves, moves: PgnConverter(game.moves) },
+				payload: {
+					displayMoves: game.moves,
+					moves: PgnConverter(game.moves),
+					correctRating: game.whiteelo,
+					result: game.result,
+				},
 			});
 		};
-
+		inputRef.current.clear();
 		getGame().catch((error) => console.log(error));
-	}, []);
+	}, [state.round]);
 
 	return (
 		<ScrollView
@@ -57,13 +64,14 @@ export const Play = ({ navigation }) => {
 			keyboardShouldPersistTaps="handled"
 		>
 			<View style={Styles.container}>
-				<AnsweredModal isVisible={state.modalVisible} dispatch={dispatch} />
+				<AnsweredModal state={state} dispatch={dispatch} />
 				<GoBack nav={navigation} />
-				<Text style={Styles.indextext}>1/3</Text>
+				<Text style={Styles.indextext}>{state.round}/3</Text>
 				<TextInput
+					ref={inputRef}
 					style={Styles.inputfield}
 					editable
-					placeholder="Enter your guess"
+					placeholder="Your guess"
 					placeholderTextColor={'#E5E5E551'}
 					keyboardType="numeric"
 					maxLength={4}
@@ -71,7 +79,12 @@ export const Play = ({ navigation }) => {
 					value={state.input}
 				></TextInput>
 				<TouchableOpacity
-					onPress={() => dispatch({ type: 'setmodalvisible', payload: true })}
+					onPress={() => {
+						isNaN(parseInt(state.input))
+							? alert('Please enter guess')
+							: dispatch({ type: 'setmodalvisible', payload: true }),
+							Keyboard.dismiss();
+					}}
 					style={Styles.submitbtn}
 				>
 					<Text style={Styles.btntext}>Submit</Text>
@@ -84,7 +97,7 @@ export const Play = ({ navigation }) => {
 						colors={{ black: '#B7C0D8', white: '#E8EDF9' }}
 					/>
 				</View>
-				<HorizontalPgnScroller moves={state.displayMovesmoves} />
+				<HorizontalPgnScroller moves={state.displayMoves} />
 				<View style={Styles.buttonContainer}>
 					<ResetBoard board={chessboardRef} dispatch={dispatch} />
 					<PreviousMove

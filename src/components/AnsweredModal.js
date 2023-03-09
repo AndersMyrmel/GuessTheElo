@@ -40,21 +40,6 @@ export const AnsweredModal = ({ isVisible, setVisible }) => {
 	);
 };
 
-//<View style={Styles.container}>
-//			<Modal animationType="slide" visible={visible} transparent={true}>
-//				<View style={Styles.container}>
-//					<View style={Styles.modalview}>
-//						<Text>Succesfully answered!</Text>
-//						<Text>Your guess: 1421</Text>
-//						<Text>Correct rating: 1734</Text>
-//						<TouchableOpacity style={Styles.continuebtn}>
-//							<Text style={Styles.btntext}>Continue</Text>
-//						</TouchableOpacity>
-//					</View>
-//				</View>
-//			</Modal>
-//		</View>
-
 const Styles = StyleSheet.create({
 	centeredView: {
 		flex: 1,

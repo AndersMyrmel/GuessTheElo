@@ -28,10 +28,7 @@ import {
 
 export const Play = ({ navigation }) => {
 	const [state, dispatch] = useReducer(GameReducer, INITIAL_STATE);
-	const [input, setInput] = useState('');
 	const chessboardRef = useRef();
-	const [moves, setMoves] = useState('');
-	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
 		const ref = doc(
@@ -43,11 +40,14 @@ export const Play = ({ navigation }) => {
 		const getGame = async () => {
 			const docSnap = await getDoc(ref);
 			const game = docSnap.data();
-			setMoves(game.moves);
-			dispatch({ type: 'setmoves', payload: PgnConverter(game.moves) });
+
+			dispatch({
+				type: 'setmultiple',
+				payload: { displayMoves: game.moves, moves: PgnConverter(game.moves) },
+			});
 		};
 
-		getGame().catch(console.error);
+		getGame().catch((error) => console.log(error));
 	}, []);
 
 	return (
@@ -56,7 +56,7 @@ export const Play = ({ navigation }) => {
 			style={{ backgroundColor: 'rgba(5,5,5,0.90)' }}
 		>
 			<View style={Styles.container}>
-				<AnsweredModal isVisible={visible} setVisible={setVisible} />
+				<AnsweredModal isVisible={state.modalVisible} dispatch={dispatch} />
 				<GoBack nav={navigation} />
 				<Text style={Styles.indextext}>1/3</Text>
 				<TextInput
@@ -66,11 +66,11 @@ export const Play = ({ navigation }) => {
 					placeholderTextColor={'#E5E5E551'}
 					keyboardType="numeric"
 					maxLength={4}
-					onChangeText={(text) => setInput(text)}
-					value={input}
+					onChangeText={(text) => dispatch({ type: 'setinput', payload: text })}
+					value={state.input}
 				></TextInput>
 				<TouchableOpacity
-					onPress={() => setVisible(true)}
+					onPress={() => dispatch({ type: 'setmodalvisible', payload: true })}
 					style={Styles.submitbtn}
 				>
 					<Text style={Styles.btntext}>Submit</Text>
@@ -83,7 +83,7 @@ export const Play = ({ navigation }) => {
 						colors={{ black: '#B7C0D8', white: '#E8EDF9' }}
 					/>
 				</View>
-				<HorizontalPgnScroller moves={moves} />
+				<HorizontalPgnScroller moves={state.displayMovesmoves} />
 				<View style={Styles.buttonContainer}>
 					<ResetBoard board={chessboardRef} dispatch={dispatch} />
 					<PreviousMove

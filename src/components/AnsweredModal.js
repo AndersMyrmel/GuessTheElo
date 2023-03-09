@@ -7,7 +7,7 @@ import {
 	Image,
 } from 'react-native';
 
-export const AnsweredModal = ({ isVisible, setVisible }) => {
+export const AnsweredModal = ({ isVisible, dispatch }) => {
 	return (
 		<View style={Styles.centeredView}>
 			<Modal
@@ -15,7 +15,11 @@ export const AnsweredModal = ({ isVisible, setVisible }) => {
 				transparent={true}
 				visible={isVisible}
 				onRequestClose={() => {
-					setVisible(!isVisible);
+					dispatch({
+						type: 'setmodalvisible',
+						payload: !isVisible,
+					});
+					//setVisible(!isVisible);
 				}}
 			>
 				<View style={Styles.centeredView}>
@@ -28,7 +32,12 @@ export const AnsweredModal = ({ isVisible, setVisible }) => {
 						<Text style={Styles.subtext}>Your guess: 1421</Text>
 						<Text style={Styles.subtext}>Correct rating: 1734</Text>
 						<TouchableOpacity
-							onPress={() => setVisible(!isVisible)}
+							onPress={() =>
+								dispatch({
+									type: 'setmodalvisible',
+									payload: !isVisible,
+								})
+							}
 							style={Styles.continuebtn}
 						>
 							<Text style={Styles.btntext}>Continue</Text>

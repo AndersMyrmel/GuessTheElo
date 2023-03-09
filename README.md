@@ -14,3 +14,4 @@ Chess game for iOS and Android developed with react and firebase
 
 ## Art :art:
 https://pngtree.com/freepng/woman-playing-chess-game_7299467.html
+https://www.freepik.com/search?format=search&query=chess%20illustration

@@ -36,9 +36,17 @@ export default function App() {
 				initialRouteName="Home"
 				screenOptions={{ headerShown: false }}
 			>
-				<Stack.Screen name="Home" component={Home} />
+				<Stack.Screen
+					name="Home"
+					component={Home}
+					options={{ gestureEnabled: false }}
+				/>
 				<Stack.Screen name="Play" component={Play} />
-				<Stack.Screen name="Result" component={Result} />
+				<Stack.Screen
+					name="Result"
+					component={Result}
+					options={{ gestureEnabled: false }}
+				/>
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

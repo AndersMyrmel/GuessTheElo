@@ -9,7 +9,6 @@ export const Result = ({ route, navigation }) => {
 
 	return (
 		<SafeAreaView style={Styles.container}>
-			<GoBack nav={navigation} />
 			<Text style={Styles.headertext}>Result</Text>
 			<Text style={Styles.titletext}>Well Done</Text>
 			<Text style={Styles.totaltext}>

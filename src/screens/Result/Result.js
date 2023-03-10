@@ -1,6 +1,5 @@
 import { View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { Styles } from './Styles';
-import { GoBack } from '../../components/GoBack';
 import { RoundResult } from '../../components/RoundResult';
 
 export const Result = ({ route, navigation }) => {
@@ -35,7 +34,7 @@ export const Result = ({ route, navigation }) => {
 			<TouchableOpacity
 				style={Styles.finishbtn}
 				onPress={() => {
-					console.log(guesses), navigation.navigate('Home');
+					navigation.navigate('Home');
 				}}
 			>
 				<Text style={Styles.btntext}>Finish</Text>

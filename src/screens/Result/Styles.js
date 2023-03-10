@@ -11,7 +11,7 @@ export const Styles = StyleSheet.create({
 		fontSize: 20,
 		color: '#FFFFFF',
 		fontFamily: 'Poppins-SemiBold',
-		top: 82,
+		top: 80,
 		position: 'absolute',
 	},
 	titletext: {

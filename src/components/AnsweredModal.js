@@ -63,7 +63,11 @@ export const AnsweredModal = ({ nav, state, dispatch }) => {
 							onPress={() => nextRound()}
 							style={Styles.continuebtn}
 						>
-							<Text style={Styles.btntext}>Next round</Text>
+							{state.round <= 2 ? (
+								<Text style={Styles.btntext}>Next round</Text>
+							) : (
+								<Text style={Styles.btntext}>Summary</Text>
+							)}
 						</TouchableOpacity>
 					</View>
 				</View>

@@ -1,16 +1,20 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { ScoreBar } from './ScoreBar';
 
-export const RoundResult = ({ round, score }) => {
+export const RoundResult = ({ round, guess, answer }) => {
+	const getScore = (guess, answer) => {
+		return guess > answer ? guess - answer : answer - guess;
+	};
+
 	return (
 		<View style={Styles.section}>
 			<Text style={Styles.roundtext}>Round {round}</Text>
-			<Text style={Styles.subtext}>Your guess: 1421</Text>
+			<Text style={Styles.subtext}>Your guess: {guess}</Text>
 			<View style={Styles.textcontainer}>
-				<Text style={Styles.subtext}>Corect rating: 1734</Text>
-				<Text style={[Styles.scoretext]}>Score: 313</Text>
+				<Text style={Styles.subtext}>Corect rating: {answer}</Text>
+				<Text style={[Styles.scoretext]}>Score: {getScore(guess, answer)}</Text>
 			</View>
-			<ScoreBar score={score} />
+			<ScoreBar score={2000 - getScore(guess, answer)} />
 		</View>
 	);
 };

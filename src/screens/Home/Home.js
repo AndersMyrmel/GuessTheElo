@@ -24,9 +24,7 @@ export const Home = ({ navigation }) => {
 				source={require('../../assets/images/settings-icon.png')}
 			/>
 			<Text style={Styles.titletext}>Guess The Elo</Text>
-			<Text style={Styles.subtext}>
-				Guided by a short introductory course, start trying meditation.
-			</Text>
+			<Text style={Styles.subtext}>Put your chess knowledge to the test</Text>
 			<Image
 				style={Styles.homeimage}
 				source={require('../../assets/images/home-graphic.png')}

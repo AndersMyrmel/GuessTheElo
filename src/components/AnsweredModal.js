@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
 	Modal,
 	StyleSheet,
@@ -7,18 +8,33 @@ import {
 	Image,
 } from 'react-native';
 
-export const AnsweredModal = ({ state, dispatch }) => {
+export const AnsweredModal = ({ nav, state, dispatch }) => {
+	const [ready, setReady] = useState(false);
+
+	useEffect(() => {
+		if (ready) {
+			nav.navigate('Result', {
+				guesses: state.guessesArray,
+				correctAnswers: state.correctArray,
+			});
+		}
+	}, [ready]);
+
 	const nextRound = () => {
 		if (state.round >= 3) {
-			console.log('Finished');
-			return dispatch({
-				type: 'setmodalvisible',
-				payload: !state.modalVisible,
+			dispatch({
+				type: 'setmultiple',
+				payload: {
+					guessesArray: [...state.guessesArray, parseInt(state.input)],
+					modalVisible: !state.modalVisible,
+				},
 			});
+			return setReady(true);
 		}
 		dispatch({
 			type: 'setmultiple',
 			payload: {
+				guessesArray: [...state.guessesArray, parseInt(state.input)],
 				modalVisible: !state.modalVisible,
 				round: state.round + 1,
 			},
@@ -47,7 +63,7 @@ export const AnsweredModal = ({ state, dispatch }) => {
 							onPress={() => nextRound()}
 							style={Styles.continuebtn}
 						>
-							<Text style={Styles.btntext}>Continue</Text>
+							<Text style={Styles.btntext}>Next round</Text>
 						</TouchableOpacity>
 					</View>
 				</View>

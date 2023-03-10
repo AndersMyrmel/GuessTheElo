@@ -8,6 +8,8 @@ export const INITIAL_STATE = {
 	round: 1,
 	correctRating: -1,
 	result: null,
+	guessesArray: [],
+	correctArray: [],
 };
 
 export const GameReducer = (state, action) => {
@@ -56,6 +58,16 @@ export const GameReducer = (state, action) => {
 			return {
 				...state,
 				result: action.payload,
+			};
+		case 'setguessesarray':
+			return {
+				...state,
+				guessesArray: [...state.guessesArray, action.payload],
+			};
+		case 'setcorrectarray':
+			return {
+				...state,
+				correctArray: [...state.correctArray, action.payload],
 			};
 		case 'setmultiple':
 			return {

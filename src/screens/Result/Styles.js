@@ -30,7 +30,7 @@ export const Styles = StyleSheet.create({
 		fontFamily: 'Poppins-Regular',
 		position: 'absolute',
 	},
-	continuebtn: {
+	finishbtn: {
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#FCFCFC',

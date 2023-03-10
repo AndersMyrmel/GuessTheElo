@@ -5,7 +5,7 @@ export const ScoreBar = ({ score }) => {
 	const counter = useRef(new Animated.Value(0)).current;
 
 	const width = counter.interpolate({
-		inputRange: [0, 100],
+		inputRange: [0, 2000],
 		outputRange: ['0%', '100%'],
 		extrapolate: 'clamp',
 	});
@@ -13,7 +13,8 @@ export const ScoreBar = ({ score }) => {
 	const load = (percentage) => {
 		Animated.timing(counter, {
 			toValue: percentage,
-			duration: 500,
+			delay: 500,
+			duration: 750,
 			useNativeDriver: false,
 		}).start();
 	};

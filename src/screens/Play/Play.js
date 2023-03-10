@@ -49,6 +49,7 @@ export const Play = ({ navigation }) => {
 					displayMoves: game.moves,
 					moves: PgnConverter(game.moves),
 					correctRating: game.whiteelo,
+					correctArray: [...state.correctArray, game.whiteelo],
 					result: game.result,
 				},
 			});
@@ -64,7 +65,7 @@ export const Play = ({ navigation }) => {
 			keyboardShouldPersistTaps="handled"
 		>
 			<View style={Styles.container}>
-				<AnsweredModal state={state} dispatch={dispatch} />
+				<AnsweredModal nav={navigation} state={state} dispatch={dispatch} />
 				<GoBack nav={navigation} />
 				<Text style={Styles.indextext}>{state.round}/3</Text>
 				<TextInput
@@ -94,6 +95,7 @@ export const Play = ({ navigation }) => {
 						ref={chessboardRef}
 						durations={{ move: 150 }}
 						boardSize={340}
+						gestureEnabled={false}
 						colors={{ black: '#B7C0D8', white: '#E8EDF9' }}
 					/>
 				</View>

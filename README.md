@@ -18,3 +18,5 @@ https://pngtree.com/freepng/woman-playing-chess-game_7299467.html
 https://www.freepik.com/search?format=search&query=chess%20illustration
 
 https://www.freepik.com/free-vector/flat-design-people-playing-chess_24370371.htm#from_view=detail_serie
+
+https://www.istockphoto.com/vector/chess-tournament-between-old-man-and-young-woman-gm1445217928-483698571?phrase=playing%20chess

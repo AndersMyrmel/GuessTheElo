@@ -1,0 +1,67 @@
+import { StyleSheet } from 'react-native';
+
+export const Styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: 'rgba(5,5,5,0.90)',
+	},
+	headertext: {
+		fontSize: 20,
+		color: '#FFFFFF',
+		fontFamily: 'Poppins-SemiBold',
+		top: 82,
+		position: 'absolute',
+	},
+	titletext: {
+		fontSize: 24,
+		color: '#FFFFFF',
+		fontFamily: 'Poppins-SemiBold',
+		top: 163,
+		left: 30,
+		position: 'absolute',
+	},
+	subtext: {
+		fontSize: 15,
+		color: '#525A64',
+		top: 200,
+		left: 30,
+		fontFamily: 'Poppins-Regular',
+		position: 'absolute',
+	},
+	inputfield: {
+		width: 308,
+		height: 54,
+		borderRadius: 8,
+		backgroundColor: '#F1F4FA',
+		color: '#1C2439',
+		fontFamily: 'Poppins-Regular',
+		fontSize: 15,
+		padding: 5,
+		bottom: 50,
+	},
+	submitbtn: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#595959',
+		marginBottom: 10,
+		width: 308,
+		height: 54,
+		borderRadius: 5,
+		top: 400,
+		position: 'absolute',
+		shadowColor: '#200E32',
+		shadowOffset: {
+			width: 0,
+			height: 10,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 5,
+	},
+	btntext: {
+		fontSize: 18,
+		color: '#FFFFFF',
+		fontFamily: 'Poppins-Medium',
+	},
+});

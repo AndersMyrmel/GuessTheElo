@@ -6,6 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { Home } from './src/screens/Home/Home';
 import { Play } from './src/screens/Play/Play';
 import { Result } from './src/screens/Result/Result';
+import { Settings } from './src/screens/Settings/Settings';
 
 SplashScreen.preventAutoHideAsync();
 const Stack = createNativeStackNavigator();
@@ -41,6 +42,7 @@ export default function App() {
 					component={Home}
 					options={{ gestureEnabled: false }}
 				/>
+				<Stack.Screen name="Settings" component={Settings} />
 				<Stack.Screen name="Play" component={Play} />
 				<Stack.Screen
 					name="Result"

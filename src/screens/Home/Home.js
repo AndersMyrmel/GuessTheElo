@@ -19,10 +19,15 @@ export const Home = ({ navigation }) => {
 					source={require('../../assets/images/leaderboard-icon.png')}
 				/>
 			</TouchableOpacity>
-			<Image
+			<TouchableOpacity
 				style={Styles.settingsicon}
-				source={require('../../assets/images/settings-icon.png')}
-			/>
+				onPress={() => navigation.navigate('Settings')}
+			>
+				<Image
+					style={{ width: 32, height: 32 }}
+					source={require('../../assets/images/settings-icon.png')}
+				/>
+			</TouchableOpacity>
 			<Text style={Styles.titletext}>Guess The Elo</Text>
 			<Text style={Styles.subtext}>Put your chess knowledge to the test</Text>
 			<Image

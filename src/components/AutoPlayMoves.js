@@ -7,7 +7,7 @@ export const AutoPlayMoves = ({ state }) => {
 			onPress={() => console.log(state.moves)}
 		>
 			<Image
-				style={{ width: 53, height: 53 }}
+				style={{ width: 47, height: 47 }}
 				source={require('../assets/images/auto-play-button.png')}
 			/>
 		</TouchableOpacity>

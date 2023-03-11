@@ -14,7 +14,7 @@ export const ScoreBar = ({ score }) => {
 		Animated.timing(counter, {
 			toValue: percentage,
 			delay: 500,
-			duration: 750,
+			duration: 500,
 			useNativeDriver: false,
 		}).start();
 	};

@@ -39,7 +39,7 @@ export const Styles = StyleSheet.create({
 	},
 	btntext: {
 		fontSize: 13,
-		color: '#0A0A0A',
+		color: '#000000',
 		fontFamily: 'Poppins-Medium',
 	},
 	board: {

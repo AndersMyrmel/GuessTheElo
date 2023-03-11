@@ -8,7 +8,7 @@ import {
 	Image,
 } from 'react-native';
 
-export const AnsweredModal = ({ nav, state, dispatch }) => {
+export const AnsweredModal = ({ nav, state, dispatch, chessboardRef }) => {
 	const [ready, setReady] = useState(false);
 
 	useEffect(() => {
@@ -20,7 +20,7 @@ export const AnsweredModal = ({ nav, state, dispatch }) => {
 		}
 	}, [ready]);
 
-	const nextRound = () => {
+	const nextRound = async () => {
 		if (state.round >= 3) {
 			dispatch({
 				type: 'setmultiple',
@@ -37,8 +37,12 @@ export const AnsweredModal = ({ nav, state, dispatch }) => {
 				guessesArray: [...state.guessesArray, parseInt(state.input)],
 				modalVisible: !state.modalVisible,
 				round: state.round + 1,
+				count: 0,
 			},
 		});
+		await chessboardRef.current?.resetBoard(
+			'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+		);
 	};
 
 	return (
@@ -59,10 +63,7 @@ export const AnsweredModal = ({ nav, state, dispatch }) => {
 						<Text style={Styles.subtext}>
 							Correct rating: {state.correctRating}
 						</Text>
-						<TouchableOpacity
-							onPress={() => nextRound()}
-							style={Styles.continuebtn}
-						>
+						<TouchableOpacity onPress={nextRound} style={Styles.continuebtn}>
 							{state.round <= 2 ? (
 								<Text style={Styles.btntext}>Next round</Text>
 							) : (

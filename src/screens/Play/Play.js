@@ -65,7 +65,12 @@ export const Play = ({ navigation }) => {
 			keyboardShouldPersistTaps="handled"
 		>
 			<View style={Styles.container}>
-				<AnsweredModal nav={navigation} state={state} dispatch={dispatch} />
+				<AnsweredModal
+					nav={navigation}
+					state={state}
+					dispatch={dispatch}
+					chessboardRef={chessboardRef}
+				/>
 				<GoBack nav={navigation} />
 				<Text style={Styles.indextext}>{state.round}/3</Text>
 				<TextInput

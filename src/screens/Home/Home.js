@@ -1,15 +1,21 @@
-import {
-	View,
-	SafeAreaView,
-	Text,
-	TouchableOpacity,
-	Image,
-} from 'react-native';
+import { SafeAreaView, Text, TouchableOpacity, Image } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Styles } from './Styles';
 
 export const Home = ({ navigation }) => {
+	const clearOnboading = async () => {
+		try {
+			await AsyncStorage.removeItem('@viewedOnboarding');
+		} catch (error) {}
+	};
+
 	return (
 		<SafeAreaView style={Styles.container}>
+			<TouchableOpacity onPress={clearOnboading} style={{ top: 30 }}>
+				<Text style={[Styles.btntext, { color: 'white' }]}>
+					Clear onboarding
+				</Text>
+			</TouchableOpacity>
 			<TouchableOpacity
 				style={Styles.leaderboardicon}
 				onPress={() => navigation.navigate('Result')}

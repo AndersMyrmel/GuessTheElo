@@ -5,3 +5,7 @@ export * from './AutoPlayMoves.js';
 export * from './GoBack.js';
 export * from './HorizontalPgnScroller.js';
 export * from './AnsweredModal.js';
+export * from './OnboardingItem.js';
+export * from './NextOnboarding.js';
+export * from './SkipOnboarding.js';
+export * from './Paginator.js';

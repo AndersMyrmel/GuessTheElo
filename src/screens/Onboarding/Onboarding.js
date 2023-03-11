@@ -8,14 +8,17 @@ import {
 	TouchableOpacity,
 	Text,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Styles } from './Styles';
-import { OnboardingItem } from '../../components/OnboardingItem';
-import { Paginator } from '../../components/Paginator';
-import { NextOnboarding } from '../../components/NextOnboarding';
-import { SkipOnboarding } from '../../components/SkipOnboarding';
+import {
+	OnboardingItem,
+	Paginator,
+	NextOnboarding,
+	SkipOnboarding,
+} from '../../components/Index';
 import slides from '../../../slides';
 
-export const Onboarding = () => {
+export const Onboarding = ({ navigation }) => {
 	const [username, setUsername] = useState('');
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const scrollX = useRef(new Animated.Value(0)).current;
@@ -26,13 +29,22 @@ export const Onboarding = () => {
 		setCurrentIndex(viewableItems[0].index);
 	}).current;
 
-	const scrollTo = () => {
+	const scrollTo = async () => {
 		if (currentIndex < slides.length - 1)
 			slidesRef.current.scrollToIndex({ index: currentIndex + 1 });
 	};
 
-	const skipScroll = () => {
+	const skipScroll = async () => {
 		if (currentIndex < slides.length - 1) slidesRef.current.scrollToEnd();
+	};
+
+	const setOnboarding = async () => {
+		try {
+			await AsyncStorage.setItem('@viewedOnboarding', 'true');
+		} catch (error) {
+		} finally {
+			navigation.replace('Home');
+		}
 	};
 
 	return (
@@ -67,7 +79,10 @@ export const Onboarding = () => {
 						onChangeText={(text) => setUsername(text)}
 						value={username}
 					></TextInput>
-					<TouchableOpacity style={Styles.getstartedbtn}>
+					<TouchableOpacity
+						onPress={setOnboarding}
+						style={Styles.getstartedbtn}
+					>
 						<Text style={Styles.getstarted}>Get started</Text>
 					</TouchableOpacity>
 				</View>

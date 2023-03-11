@@ -43,7 +43,7 @@ export const Onboarding = ({ navigation }) => {
 			await AsyncStorage.setItem('@viewedOnboarding', 'true');
 		} catch (error) {
 		} finally {
-			navigation.replace('Home');
+			navigation.navigate('Home');
 		}
 	};
 

@@ -41,6 +41,7 @@ export const Onboarding = ({ navigation }) => {
 	const setOnboarding = async () => {
 		try {
 			await AsyncStorage.setItem('@viewedOnboarding', 'true');
+			await AsyncStorage.setItem('@username', username);
 		} catch (error) {
 		} finally {
 			navigation.navigate('Home');

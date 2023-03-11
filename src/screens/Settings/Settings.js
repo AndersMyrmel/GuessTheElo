@@ -1,10 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TextInput, SafeAreaView, Text, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Styles } from './Styles';
 import { GoBack } from '../../components/GoBack';
 
 export const Settings = ({ navigation }) => {
 	const [value, setValue] = useState('');
+	const [username, setUsername] = useState('');
+
+	useEffect(() => {
+		const getUsername = async () => {
+			let username = await AsyncStorage.getItem('@username');
+			setUsername(username);
+		};
+		getUsername();
+	}, []);
 
 	return (
 		<SafeAreaView
@@ -21,7 +31,7 @@ export const Settings = ({ navigation }) => {
 			<TextInput
 				style={Styles.inputfield}
 				editable
-				placeholder="Username"
+				placeholder={username}
 				placeholderTextColor={'#757A86'}
 				onChangeText={(text) => setValue(text)}
 				value={value}

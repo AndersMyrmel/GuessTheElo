@@ -7,6 +7,7 @@ import { Home } from './src/screens/Home/Home';
 import { Play } from './src/screens/Play/Play';
 import { Result } from './src/screens/Result/Result';
 import { Settings } from './src/screens/Settings/Settings';
+import { Onboarding } from './src/screens/Onboarding/Onboarding';
 
 SplashScreen.preventAutoHideAsync();
 const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ export default function App() {
 		'Poppins-Regular': require('./src/assets/fonts/Poppins/Poppins-Regular.ttf'),
 		'Poppins-Medium': require('./src/assets/fonts/Poppins/Poppins-Medium.ttf'),
 		'Poppins-SemiBold': require('./src/assets/fonts/Poppins/Poppins-SemiBold.ttf'),
+		'Poppins-Bold': require('./src/assets/fonts/Poppins/Poppins-Bold.ttf'),
 		'Roboto-Medium': require('./src/assets/fonts/Roboto/Roboto-Medium.ttf'),
 	});
 
@@ -34,7 +36,7 @@ export default function App() {
 	return (
 		<NavigationContainer onReady={onLayoutRootView}>
 			<Stack.Navigator
-				initialRouteName="Home"
+				initialRouteName="Onboarding"
 				screenOptions={{ headerShown: false }}
 			>
 				<Stack.Screen
@@ -42,6 +44,7 @@ export default function App() {
 					component={Home}
 					options={{ gestureEnabled: false }}
 				/>
+				<Stack.Screen name="Onboarding" component={Onboarding} />
 				<Stack.Screen name="Settings" component={Settings} />
 				<Stack.Screen name="Play" component={Play} />
 				<Stack.Screen
